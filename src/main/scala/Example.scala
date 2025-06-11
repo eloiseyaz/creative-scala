@@ -19,7 +19,7 @@ object Example {
       .on(Image.circle(200).fillColor(Color.hotpink))
       .on(Image.circle(300).fillColor(Color.paleGoldenrod))
 
-  val animation: Reactor =
+  val animation: Reactor[Angle] =
     Reactor
       .init(0.degrees)
       .withOnTick(a => a + 0.1.degrees)
