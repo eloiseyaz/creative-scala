@@ -12,37 +12,37 @@ import cats.effect.unsafe.implicits.global
 // 1. run `sbt`
 // 2. run the `run` command within `sbt`
 object Example {
-  val image =
+  val image: Image =
     Image
       .circle(100)
-      .fillColor(Color.red)
-      .on(Image.circle(200).fillColor(Color.aquamarine))
-      .on(Image.circle(300).fillColor(Color.steelBlue))
+      .fillColor(Color.dodgerBlue)
+      .on(Image.circle(200).fillColor(Color.hotpink))
+      .on(Image.circle(300).fillColor(Color.paleGoldenrod))
 
-  val animation =
+  val animation: Reactor =
     Reactor
       .init(0.degrees)
-      .withOnTick(a => a + 1.degrees)
-      .withStop(a => a > 360.degrees)
-      .withTickRate(20.millis)
+      .withOnTick(a => a + 0.1.degrees)
+      //.withStop(a => a > 360.degrees)
+      .withTickRate(2.millis)
       .withRender { a =>
         val location = Point(200, a)
-        val planet = Image.circle(40.0).noStroke.fillColor(Color.seaGreen)
+        val planet = Image.circle(40.0).noStroke.fillColor(Color.fuchsia)
         val moon = Image
           .circle(10.0)
           .noStroke
-          .fillColor(Color.slateGray)
+          .fillColor(Color.lightPink)
           .at(Point(60, a * 5))
 
         moon.on(planet).at(location)
       }
 
-  val frame = Frame.default.withSize(600, 600).withCenterAtOrigin
+  val frame: Frame = Frame.default.withSize(600, 600).withCenterAtOrigin
 
   @main def go(): Unit = {
-    image.draw()
+    //image.draw()
 
     // Comment out the above and uncomment the below to display the animation
-    // animation.run(frame)
+    animation.run(frame)
   }
 }
